@@ -1,16 +1,33 @@
-print("maak uw keuze:")
-print("1. server toevoegen ")
-print("2. server verwijderen ")
-print("3. lijst tonen ")
+import sys 
 
-antw = int((input("geef uw keuze: ")))
+if len(sys.argv) == 1:
 
-match antw:
-    case 1: 
-        print("server toevoegen")
-    case 2: 
-        print("server verwijderen")
-    case 3: 
-        print("lijst tonen ")
-    case _:
-        print("niet geldig")
+    print("maak uw keuze:")
+    print("1. server toevoegen ")
+    print("2. server verwijderen ")
+    print("3. lijst tonen ")
+
+    antw = int((input("geef uw keuze: ")))
+
+    match antw:
+        case 1: 
+            print("server toevoegen")
+        case 2: 
+            print("server verwijderen")
+        case 3: 
+            print("lijst tonen ")
+        case _:
+            print("niet geldig")
+
+else: 
+    keuze = int(sys.argv[1])
+
+    match keuze:
+        case 1: 
+            print("server toevoegen")
+        case 2: 
+            print("server verwijderen")
+        case 3: 
+            print("lijst tonen ")
+        case _:
+            print("niet geldig")
