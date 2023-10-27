@@ -1,5 +1,6 @@
 import sys 
 import json
+from ping3 import ping
 
 def main():
     if len(sys.argv) == 1:
@@ -13,48 +14,62 @@ def main():
 
         match antw:
             case 1: 
-                print("u koos voor : server toevoegen")
+                print("server toevoegen")
                 adres = input("wat is het adres? ")
-                Wegschrijven(adres)
+                TestOk = myping(adres)
+                Wegschrijven(adres,TestOk)
             case 2: 
                 print("server verwijderen")
+                
             case 3: 
                 print("lijst tonen ")
             case _:
                 print("niet geldig")
 
     else: 
-        keuze = int(sys.argv[1])
+        keuze = sys.argv[1]
 
         match keuze:
-            case 1: 
-                print("u koos voor : server toevoegen")
+            case "addserver": 
+                print("server toevoegen")
                 adres = input("wat is het adres? ")
-                Wegschrijven(adres)
-            case 2: 
+                #adres = sys.argv[2]
+                TestOk = myping(adres)
+                Wegschrijven(adres,TestOk)
+            case "deleteserver": 
                 print("server verwijderen")
-            case 3: 
+            case "listservers": 
                 print("lijst tonen ")
             case _:
                 print("niet geldig")
 
-def Wegschrijven(WebAdres):
-    # bestaande data uitlezen
-    # WebAdres toevoegen aan bestaande lijst met servers
-    # data terug wegschrijven
+def Wegschrijven(WebAdres, Test):
+
     data = {}
     with open("ingevoerde_data.json", "r") as data_file:
-        # hier data echte beginwaarde geven
         data = json.load(data_file)
-        # dan kan je aan data[servers]
-        data["servers"].append(WebAdres)
+        
+    with open("testOk", "r") as data_file2:
+        TestOK = json.load(data_file2)
+
+    data["servers"].append(WebAdres)
+    TestOK["servers"].append(WebAdres)
+    TestOK["TestOk"].append(Test)
 
     with open("ingevoerde_data.json", "w") as data_file:
         representation = json.dumps(data)
-        # json.dump(data, data_file)
         data_file.write(representation)
 
     print("Gegevens zijn opgeslagen in 'ingevoerde_data.json'.")
 
+
+def myping(host):
+    resp = ping(host)
+
+    if resp == False:
+        return False
+    else:
+        return True
+    
 if __name__ == "__main__":
     main()
