@@ -1,4 +1,1 @@
-{
-    "servers": [],
-    "TestOK": []
-}
+{"servers": ["www.facebook.com", "bchdjdh"], "TestOK": [true, false]}

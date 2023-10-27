@@ -20,7 +20,12 @@ def main():
                 Wegschrijven(adres,TestOk)
             case 2: 
                 print("server verwijderen")
-                
+                adresVerwijderen = input("welk adres moet verwijderd worden?")
+                if Verwijderen(adresVerwijderen):
+                    print("webadres verwijderd")
+                else:
+                    print("webadres bestaat niet")
+
             case 3: 
                 print("lijst tonen ")
             case _:
@@ -46,22 +51,41 @@ def main():
 def Wegschrijven(WebAdres, Test):
 
     data = {}
+    TestOK = {}
     with open("ingevoerde_data.json", "r") as data_file:
         data = json.load(data_file)
         
-    with open("testOk", "r") as data_file2:
+    with open("testOK.json", "r") as data_file2:
         TestOK = json.load(data_file2)
 
     data["servers"].append(WebAdres)
+
     TestOK["servers"].append(WebAdres)
-    TestOK["TestOk"].append(Test)
+    TestOK["TestOK"].append(Test)
 
     with open("ingevoerde_data.json", "w") as data_file:
         representation = json.dumps(data)
         data_file.write(representation)
+    
+    with open("testOK.json", "w") as data_file2:
+        representation = json.dumps(TestOK)
+        data_file2.write(representation)
 
     print("Gegevens zijn opgeslagen in 'ingevoerde_data.json'.")
 
+def Verwijderen(Webadres):
+    data = {}
+    with open("ingevoerde_data.json", "r") as data_file:
+        data = json.load(data_file)
+    if Webadres in data["servers"]:
+        data["servers"].remove(Webadres)
+        with open("ingevoerde_data.json", "w") as data_file:
+            representation = json.dumps(data)
+            data_file.write(representation)
+        return True
+    else:
+        return False
+    
 
 def myping(host):
     resp = ping(host)
