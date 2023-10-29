@@ -2,6 +2,7 @@ import sys
 import json
 from ping3 import ping
 from jinja2 import Environment, FileSystemLoader
+from rich import print
 
 def main():
     if len(sys.argv) == 1:
@@ -9,11 +10,11 @@ def main():
         while True:
 
             print("maak uw keuze:")
-            print("1. server toevoegen ")
-            print("2. server checken ")
-            print("3. server verwijderen ")
-            print("4. lijst tonen ")
-            print("0. stoppen ")
+            print("[bold magenta]1. server toevoegen [/bold magenta] ")
+            print("[bold blue]2. server checken [/bold blue]")
+            print("[bold green]3. server verwijderen [/bold green]")
+            print("[bold red]4. lijst tonen [/bold red]")
+            print("[bold yellow]0. stoppen [/bold yellow]")
 
             antw = int((input("geef uw keuze: ")))
 
