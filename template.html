@@ -1,0 +1,32 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Server Status Report</title>
+</head>
+<body>
+    <h1>Server Status Report</h1>
+    <table>
+        <tr>
+            <th>Server Name</th>
+            <th>Status</th>
+        </tr>
+        {server_rows}
+    </table>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Server Status Report</title>
+</head>
+<body>
+    <h1>Server Status Report</h1>
+    <ul>
+        {% for server in servers %}
+        <li>Server: {{ server.name }} - Status: {{ server.status }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+
